@@ -1,0 +1,581 @@
+// inserting element
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[50], i, elem, pos, tot;
+    cout << "Enter the Size for Array: ";
+    cin >> tot;
+    cout << "Enter " << tot << " Array Elements: ";
+    for ( i=0; i < tot; i++)
+        cin >> arr[i];
+    cout << "\nEnter Element to Insert: ";
+    cin >> elem;
+    cout << "At What Position ? ";
+    cin >> pos;
+    for(i = tot; i >= pos; i--)
+        arr[i] = arr[i-1];
+    arr[i] = elem;
+    tot++;
+    cout<< "The New Array is: ";
+    for (i = 0; i < tot; i++)
+        cout << arr[i] << "  ";
+    cout<<endl;
+    return 0;
+}
+
+//deleting array
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int arr[50], i, pos, tot;
+    cout << "Enter the Size for Array: ";
+    cin >> tot;
+    cout << "Enter " << tot << " Array Elements: ";
+    for ( i=0; i < tot; i++)
+        cin >> arr[i];
+    cout << "At What Position ? ";
+    cin >> pos;
+    for (int i = pos - 1; i < tot - 1; i++)
+        arr[i] = arr[i + 1];
+    cout<< "The New Array is: ";
+    for (i = 0; i < tot - 1; i++)
+        cout << arr[i] << "  ";
+    cout<<endl;
+    return 0;
+}
+
+
+// inserting linked list
+#include<bits/stdc++.h>
+using namespace std;
+struct Node
+{
+   int data;
+   struct Node *next;
+};
+void insertStart (struct Node **head, int data)
+{
+   struct Node *newNode = (struct Node *) malloc (sizeof (struct Node));
+   newNode->data = data;
+   newNode->next = *head;
+   *head = newNode;
+}
+void display (struct Node *node)
+{
+   while (node != NULL)
+   {
+      printf ("%d ", node->data);
+      node = node->next;
+   }
+   printf ("\n");
+}
+int main ()
+{
+   struct Node *head = NULL;
+   struct Node *node2 = NULL;
+   struct Node *node3 = NULL;
+   struct Node *node4 = NULL;
+   head = (struct Node *) malloc (sizeof (struct Node));
+   node2 = (struct Node *) malloc (sizeof (struct Node));
+   node3 = (struct Node *) malloc (sizeof (struct Node));
+   node4 = (struct Node *) malloc (sizeof (struct Node));
+   head->data = 15;		 
+   head->next = node2;	
+   node2->data = 10;
+   node2->next = node3;
+   node3->data = 12;
+   node3->next = node4;
+   node4->data = 3;
+   node4->next = NULL;
+   cout << "The linked list is: ";
+   display (head);
+   int n;
+   cout << "Enter inseting data: ";
+   cin >> n;
+   insertStart (&head, n);
+   cout << "after inseting data: ";
+   display (head);
+   return 0;
+}
+
+//deleting node
+#include <stdio.h>
+#include <stdlib.h>
+
+//node structure
+struct Node {
+  int data;
+  struct Node* next;
+};
+
+//Add new element at the end of the list
+void push_back(struct Node** n, int newElement) {  
+  struct Node *newNode, *temp;
+  newNode = (struct Node*)malloc(sizeof(struct Node)); 
+  newNode->data = newElement;  
+  newNode->next = NULL;
+  if(*n == NULL) {
+    *n = newNode; 
+  } else {
+    temp = *n;
+    while(temp->next != NULL) {
+      temp = temp->next;
+    }    
+    temp->next = newNode;
+  }
+}
+
+//Delete last node of the list
+void pop_back(struct Node** head_ref) {
+  if(*head_ref != NULL) {
+    if((*head_ref)->next == NULL) {
+      *head_ref = NULL;
+    } else {
+      struct Node* temp = *head_ref;
+      while(temp->next->next != NULL)
+        temp = temp->next;
+      struct Node* lastNode = temp->next;
+      temp->next = NULL;
+      free(lastNode); 
+    }
+  }
+}
+
+//display the content of the list
+void PrintList(struct Node* head_ref) {
+  struct Node* temp = head_ref;
+  if(head_ref != NULL) {
+    printf("The list contains: ");
+    while (temp != NULL) {
+      printf("%i ",temp->data);
+      temp = temp->next;  
+    }
+    printf("\n");
+  } else {
+    printf("The list is empty.\n");
+  }   
+}
+
+// test the code 
+int main() {
+  struct Node* MyList = NULL;
+
+  //Add four elements in the list.
+  push_back(&MyList, 10);
+  push_back(&MyList, 20);
+  push_back(&MyList, 30);
+  push_back(&MyList, 40);
+  PrintList(MyList);
+
+  //Delete the last node
+  pop_back(&MyList);
+  PrintList(MyList);
+  return 0; 
+}
+//bubble sort
+#include <bits/stdc++.h>
+using namespace std;
+void bubbleSort(int array[], int size) {
+  for (int step = 0; step < size - 1; ++step) {
+    for (int i = 0; i < size - step - 1; ++i) {
+      if (array[i] > array[i + 1]) {
+        int temp = array[i];
+        array[i] = array[i + 1];
+        array[i + 1] = temp;
+      }
+    }
+  }
+}
+void printArray(int array[], int size) {
+  for (int i = 0; i < size; ++i) {
+    cout << "  " << array[i];
+  }
+  cout << "\n";
+}
+int main() {
+  int data[] = {-2, 45, 0, 11, -9};
+  int size = sizeof(data) / sizeof(data[0]);
+  cout << "Unsorted array: ";
+  printArray(data, size);
+  bubbleSort(data, size);
+  cout << "Sorted Array in Ascending Order:\n";  
+  printArray(data, size);
+}
+
+//marge short
+#include <bits/stdc++.h>
+using namespace std;
+void merge(int arr[], int p, int q, int r) {
+  int n1 = q - p + 1;
+  int n2 = r - q;
+  int L[n1], M[n2];
+  for (int i = 0; i < n1; i++) L[i] = arr[p + i];
+  for (int j = 0; j < n2; j++) M[j] = arr[q + 1 + j];
+  int i, j, k;
+  i = 0;
+  j = 0;
+  k = p;
+  while (i < n1 && j < n2) {
+    if (L[i] <= M[j]) {
+      arr[k] = L[i];
+      i++;
+    } 
+    else {
+      arr[k] = M[j];
+      j++;
+    }
+    k++;
+  }
+  while (i < n1) {
+    arr[k] = L[i];
+    i++;
+    k++;
+  }
+    while (j < n2) {
+    arr[k] = M[j];
+    j++;
+    k++;
+  }
+}
+void mergeSort(int arr[], int l, int r) 
+{
+    if (l < r) 
+    {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+void printArray(int arr[], int size) 
+{
+    for (int i = 0; i < size; i++) cout << arr[i] << " ";
+    cout << endl;
+}
+int main() 
+{
+    int arr[] = {6, 5, 12, 10, 9, 1};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    cout << "The unsorted arry is: ";
+    printArray(arr, size);
+    mergeSort(arr, 0, size - 1);
+    cout << "Sorted array: \n";
+    printArray(arr, size);
+    return 0;
+}
+
+//binary search
+#include <bits/stdc++.h>
+using namespace std;
+int binarySearch(int arr[], int l, int r, int x)
+{
+	while (l <= r) {
+		int m = l + (r - l) / 2;
+		if (arr[m] == x)
+			return m;
+		if (arr[m] < x)
+			l = m + 1;
+		else
+			r = m - 1;
+	}
+	return -1;
+}
+
+int main()
+{
+	int arr[] = { 2, 3, 4, 10, 40 };
+	int x = 10;
+	int n = sizeof(arr) / sizeof(arr[0]);
+	int result = binarySearch(arr, 0, n - 1, x);
+	(result == -1)
+		? cout << "Element is not present in array"
+		: cout << "Element is present at index " << result + 1;
+	return 0;
+}
+
+
+// knapsack
+#include <bits/stdc++.h>
+using namespace std;
+const int n = 10e5;
+int profit[n], weight[n];
+int dp[1000][1000];
+int knapsack(int w, int n)
+{
+   if (dp[w][n] != -1) return dp[w][n];
+   if (n < 0 || w == 0) return 0;
+   int ans = knapsack(w, n - 1);
+   if (w - weight[n] >= 0)
+      ans = max(ans, profit[n] + knapsack(w - weight[n], n - 1));
+   return dp[w][n] = ans;
+}
+void init()
+{
+   for(int i = 0; i < 1000; i++)
+      for (int j = 0; j < 1000; j++)
+         dp[i][j] = - 1;
+}
+
+int main()
+{
+   init();
+   int n;
+   cin >> n;
+   int w;
+   cin >> w;
+   for (int i = 0; i < n; i++)
+      cin >> profit[i];
+   for (int i = 0; i < n; i++)
+      cin >> weight[i];
+   cout << knapsack(w, n - 1) << endl;
+}
+
+// job sequence
+#include <bits/stdc++.h>
+using namespace std;
+bool slot[1000];
+int main()
+{
+    int n;
+    cout << "Enter job: ";
+    cin >> n;
+    int profit[n], deadLine[n], p[n], d[n];
+    int max = 0;
+    cout << "Enter profit: ";
+    for (int i = 0; i < n; i++)
+        cin >> profit[i];
+    cout << "Enter deadline: ";
+    for (int i = 0; i < n; i++)
+    {
+        cin >> deadLine[i];
+        if (deadLine[i] > max)
+            max = deadLine[i];
+    }
+    multiset <pair<int, int>> s1;
+    for (int i = 0; i < n; i++)
+        s1.insert({profit[i], deadLine[i]});
+    int x = 0;
+    for (auto a : s1)
+    {
+        p[x] = a.first;
+        d[x] = a.second;
+        x++;
+    }
+    int value = 0, count = 0;
+    for (int i = n - 1; i >= 0; i--)
+    {
+        for (int j = d[i]; j >= 0; j--)
+        {
+            if (!slot[j])
+            {
+                value += p[i];
+                slot[j] = true;
+                count++;
+                break;
+            }
+        }
+        if (count == max)
+            break;
+    }
+    cout << value << endl;
+}
+
+//kruskal
+#include <bits/stdc++.h>
+using namespace std;
+const int n = 10e3;
+pair <int, pair<int, int>> g[n];
+int root[n];
+int edges, vertex;
+int parent(int a)
+{
+    while (root[a] != a)
+    {
+        root[a] = root[root[a]];
+        a = root[a];
+    }
+    return a;
+}
+void make_union(int a, int b)
+{
+    int x = parent(a);
+    int y = parent(b);
+    root[x] = root[y];
+}
+int kruskal()
+{
+    int a, b, cost, minCost = 0;
+    for (int i = 0; i < edges; i++)
+    {
+        cost = g[i].first;
+        a = g[i].second.first;
+        b = g[i].second.second;
+        if (parent(a) != parent(b))
+        {
+            minCost += cost;
+            make_union(a, b);
+        }
+    }
+    return minCost;
+}
+int main()
+{
+    cin >> edges >> vertex;
+    for (int i = 0; i < edges; i++)
+    {
+        int w, v1, v2;
+        cin >> w >> v1 >> v2;
+        g[i] = make_pair(w, make_pair(v1, v2));
+    }
+    for (int i = 0; i < n; i++)
+        root[i] = i;
+    sort(g, g + edges);
+    cout << kruskal() << endl;
+}
+
+
+//multistage graph
+#include <bits/stdc++.h>
+using namespace std;
+const int n = 10e3;
+int v, e;
+vector<int> g[n];
+int level[n];
+int graph[n][n];
+int cost[n][n];
+int path[n];
+void bfs(int vertex)
+{
+    queue <int> q;
+    q.push(vertex);
+    cost[level[vertex]][vertex] = 0;
+    while (!q.empty())
+    {
+        int cv = q.front();
+        q.pop();
+        for (int child : g[cv])
+        {
+            q.push(child);
+            level[child] = level[cv] + 1;
+            if (cost[level[child]][child] > cost[level[cv]][cv] + graph[child][cv])
+            {
+                cost[level[child]][child] = cost[level[cv]][cv] + graph[child][cv];
+                path[level[child]] = cv;
+            }
+        }
+    }
+}
+void init()
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            cost[i][j] = INT_MAX;
+}
+int main()
+{
+    init();
+    cin >> v >> e;
+    for (int i = 1; i <= e; i++)
+    {
+        int v1, v2, w;
+        cin >> v1 >> v2 >> w;
+        g[v2].push_back(v1);
+        graph[v1][v2] = w;
+    }
+    bfs(v);
+    for (int i = 1; i <= v; i++)
+        cout << i << " on stage: " << level[1] - level[i] << endl;
+    cout << cost[level[1]][1] << endl;
+    cout << 1 << " -> ";
+    for (int i = level[1]; i > 0; i--)
+    {
+        if (i > 1)
+            cout << path[i] << " -> ";
+        else
+         cout << path[i] << endl;
+    }
+}
+
+//floydwaeshall
+#include <bits/stdc++.h>
+using namespace std;
+const int n = 10e3;
+int v, e;
+int graph[n][n];
+void init()
+{
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+        {
+            graph[i][j] = 10e3;
+            if (i == j) graph[i][j] = 0;
+        }
+}
+int main()
+{
+    init();
+    cin >> v >> e;
+    for (int i = 0; i < e; i++)
+    {
+        int v1, v2, w;
+        cin >> v1 >> v2 >> w;
+        graph[v1][v2] = w;
+    }
+    for (int k = 1; k <= v; k++)
+        for (int i = 1; i <= v; i++)
+            for (int j = 1; j <= v; j++)
+                graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j]);
+    for (int i = 1; i <= v; i++)
+    {
+        for (int j = 1; j <= v; j++)
+            cout << graph[i][j] << "  ";
+        cout << endl;
+    }
+}
+
+
+//nqueens
+#include <bits/stdc++.h>
+using namespace std;
+const int N = 8;
+int board[N][N];
+bool ifSafe(int row, int col)
+{
+	for (int i = 0; i < col; i++)
+ 		if (board[row][i]) return false;
+	for (int i = row, j = col; i >= 0 && j >= 0; i--, j--)
+ 		if (board[i][j]) return false;
+	for (int i = row, j = col; j >= 0 && i < N; i++, j--)
+ 		if (board[i][j]) return false;
+	return true;
+	
+}
+bool solveNQueen(int col)
+{
+	if (col >= N) return true;
+	for (int i = 0; i < N; i++)
+	{
+		if (ifSafe(i, col))
+		{
+			board[i][col] = 1;
+			if (solveNQueen(col + 1)) return true;
+			board[i][col] = 0;
+		}
+	}
+	return false;
+}
+int main()
+{
+	solveNQueen(0);
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+			cout << board[i][j] << "  ";
+		cout << endl;
+	}
+}
+
+
+
