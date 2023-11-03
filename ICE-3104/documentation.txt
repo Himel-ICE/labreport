@@ -1,0 +1,10 @@
+php and database:
+
+	step-1: create a folder htdocs(directory xampp).
+	step-2: create a php file in previous created folder
+	step-3: copy the github code to VS code 
+	step-4: open  browser and tap (localhost/phpmyadmin)
+	step-5: create database same as code file
+	step-6: go to SQL tab and write queary create a table
+	step-7: tab localhost/foldername
+	
