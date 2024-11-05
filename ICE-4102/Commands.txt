@@ -1,0 +1,70 @@
+
+DHCP>>
+for each router:
+>en
+#config t
+#ip dhcp excluded-address (ip of each gateway)
+.
+.
+.
+.
+.
+#ip dhcp pool gateway
+#network gatway x.x.x.0 subnetMax
+#defaut-router gateway
+#dns-server 8.8.8.8
+#exit
+
+
+OSPF>>
+
+>enable
+#config t
+#router osfp x
+#network gteway(x.x.x.0) 0.0.0.255
+....
+....
+#exit
+#router osfp x
+#network gteway(x.x.x.0) 0.0.0.255
+....
+....
+#exit
+#router osfp x
+#network gteway(x.x.x.0) 0.0.0.255
+....
+....
+#exit
+
+
+
+VLAN>>
+	first drow necassery diagram and assign ip
+
+	in CLI:
+		for each switch:
+			(assign all vlan no. and name) as:
+			#vlan 10
+			#name ICE
+			.
+			.
+			.
+			.
+			#exit
+			#do show vlan
+		#int range fa0/3-5
+		#switchport mode access
+		#switchport access vlan 10
+		#exit
+		#int range fa0/6-10
+		#switchport mode access
+		#switchport access vlan 20
+		#exit
+
+		#do wr
+		#do show vlan
+
+		#int fa0/1(which is connected with another switch)
+		#switchport mode trunk
+		#exit
+				
